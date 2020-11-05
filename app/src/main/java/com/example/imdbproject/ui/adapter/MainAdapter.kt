@@ -17,8 +17,8 @@ class MainAdapter(private val characters: ArrayList<CharacterModel>): RecyclerVi
 
         fun bind(character: CharacterModel) {
             itemView.apply {
-                textViewUserName.text = character.name
-                textViewUserEmail.text = character.status
+                textViewCharacterName.text = character.name
+                textViewCharacterStatus.text = character.status
                 Glide.with(imageViewAvatar.context)
                     .load(character.image)
                     .into(imageViewAvatar)

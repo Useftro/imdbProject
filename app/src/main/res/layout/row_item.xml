@@ -17,7 +17,7 @@
         tools:ignore="contentDescription" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewUserName"
+        android:id="@+id/textViewCharacterName"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,15 +26,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="MindOrks" />
+        tools:text="Name" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewUserEmail"
+        android:id="@+id/textViewCharacterStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textViewUserName"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserName"
-        tools:text="MindOrks" />
+        app:layout_constraintStart_toStartOf="@+id/textViewCharacterName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCharacterName"
+        tools:text="Status" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
