@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imdbproject.R
-import com.example.imdbproject.model.CharacterModel
+import com.example.imdbproject.data.model.CharacterModel
 import kotlinx.android.synthetic.main.row_item.view.*
 import java.util.ArrayList
 

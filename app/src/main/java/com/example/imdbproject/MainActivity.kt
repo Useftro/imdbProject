@@ -5,25 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.imdbproject.R.layout
 import com.example.imdbproject.api.ApiHelper
 import com.example.imdbproject.api.RetrofitBuilder
-import com.example.imdbproject.fragment.FavoriteFragment
-import com.example.imdbproject.fragment.ProfileFragment
-import com.example.imdbproject.fragment.SettinsFragment
-import com.example.imdbproject.model.CharacterModel
+import com.example.imdbproject.data.model.CharacterModel
 import com.example.imdbproject.ui.ViewModelFactory
 import com.example.imdbproject.ui.adapter.MainAdapter
 import com.example.imdbproject.ui.viewModel.MainViewModel
 import com.example.imdbproject.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
-import com.example.imdbproject.ui.adapter.MainAdapter.*
 
 class MainActivity : AppCompatActivity() {
 

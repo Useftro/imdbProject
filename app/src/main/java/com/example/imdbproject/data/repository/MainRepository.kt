@@ -1,4 +1,4 @@
-package com.example.imdbproject.repository
+package com.example.imdbproject.data.repository
 
 import com.example.imdbproject.api.ApiHelper
 

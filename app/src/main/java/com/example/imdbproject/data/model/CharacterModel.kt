@@ -1,4 +1,4 @@
-package com.example.imdbproject.model
+package com.example.imdbproject.data.model
 
 data class CharacterModel(
     val id: Int,

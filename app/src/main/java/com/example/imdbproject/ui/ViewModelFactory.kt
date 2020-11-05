@@ -3,7 +3,7 @@ package com.example.imdbproject.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.imdbproject.api.ApiHelper
-import com.example.imdbproject.repository.MainRepository
+import com.example.imdbproject.data.repository.MainRepository
 import com.example.imdbproject.ui.viewModel.MainViewModel
 
 class ViewModelFactory(private val apiHelper: ApiHelper) : ViewModelProvider.Factory {

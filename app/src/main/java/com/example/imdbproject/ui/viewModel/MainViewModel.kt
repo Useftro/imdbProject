@@ -1,9 +1,8 @@
 package com.example.imdbproject.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.imdbproject.repository.MainRepository
+import com.example.imdbproject.data.repository.MainRepository
 import com.example.imdbproject.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception

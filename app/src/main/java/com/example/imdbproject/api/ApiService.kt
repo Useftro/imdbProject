@@ -1,8 +1,7 @@
 package com.example.imdbproject.api
 
-import com.example.imdbproject.model.CharacterModel
+import com.example.imdbproject.data.model.CharacterModel
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ApiService {
     @GET("character")
