@@ -4,108 +4,91 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.imdbproject.api.ApiHelper
-import com.example.imdbproject.api.RetrofitBuilder
-import com.example.imdbproject.data.model.CharacterModel
-import com.example.imdbproject.ui.ViewModelFactory
-import com.example.imdbproject.ui.adapter.MainAdapter
-import com.example.imdbproject.ui.viewModel.MainViewModel
-import com.example.imdbproject.utils.Status
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import com.example.imdbproject.api.ApiRequests
+import com.example.imdbproject.data.fromJsonToKotlin.Result
+import com.example.imdbproject.data.fromJsonToKotlin.serverResponse
+import com.example.imdbproject.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
+import retrofit2.Retrofit
+import retrofit2.awaitResponse
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.ArrayList
+
+const val BASE_URL = "https://rickandmortyapi.com/api/"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: MainAdapter
+    private var TAG = "MainActivity"
+    private val listResponse = arrayListOf<serverResponse>()
+    private val chars = mutableListOf<Result>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupViewModel()
-        setupUI()
-        setupObservers()
 
-//        val homeFragment = ListFragment()
-//        val favoriteFragment = FavoriteFragment()
-//        val profileFragment = ProfileFragment()
-//        val settingsFragment = SettinsFragment()
-//
-//        makeCurrentFragment(homeFragment)
-//
-//        bottom_navigation.setOnNavigationItemSelectedListener {
-//            when (it.itemId){
-//                R.id.ic_list -> makeCurrentFragment(homeFragment)
-//                R.id.ic_favorite -> makeCurrentFragment(favoriteFragment)
-//                R.id.ic_profile -> makeCurrentFragment(profileFragment)
-//                R.id.ic_settings -> makeCurrentFragment(settingsFragment)
-//            }
-//            true
-//        }
-    }
+        val all_data: ArrayList<serverResponse> = getCurrentData()
 
+        val homeFragment = ListFragment()
 
+        val bund = bundleOf("data" to all_data)
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
-            this,
-            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
-        ).get(MainViewModel::class.java)
-    }
+        homeFragment.arguments = bund
 
-    private fun setupUI() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MainAdapter(arrayListOf())
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                (recyclerView.layoutManager as LinearLayoutManager).orientation
-            )
-        )
-        recyclerView.adapter = adapter
-    }
+        val favoriteFragment = FavoriteFragment()
+        val profileFragment = ProfileFragment()
+        val settingsFragment = SettinsFragment()
 
-    private fun setupObservers() {
-        viewModel.getCharacters().observe(this, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
-                        resource.data?.let { characters -> retrieveList(characters) }
-                    }
-                    Status.ERROR -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
-                    }
-                }
+        makeCurrentFragment(profileFragment)
+
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId){
+                R.id.ic_list -> makeCurrentFragment(homeFragment)
+                R.id.ic_favorite -> makeCurrentFragment(favoriteFragment)
+                R.id.ic_profile -> makeCurrentFragment(profileFragment)
+                R.id.ic_settings -> makeCurrentFragment(settingsFragment)
             }
-        })
-    }
-
-    private fun retrieveList(characters: List<CharacterModel>) {
-        adapter.apply {
-            addCharacters(characters)
-            notifyDataSetChanged()
-            Log.d("CHARS", characters.toString())
+            true
         }
     }
 
 
+    private fun getCurrentData(): ArrayList<serverResponse>{
+        val api = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiRequests::class.java)
 
-//    private fun makeCurrentFragment(fragment: Fragment) =
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.fl_wrapper, fragment)
-//            commit()
-//        }
+        GlobalScope.launch(Dispatchers.IO) {
+            for (n in 1..34){ // Request takes only 20 chars per request, there are 591 chars
+                val response = api.getCharacters(n).awaitResponse()
+                if(response.isSuccessful){
+                    val data = response.body()!!
+                    Log.d(TAG, data.results.toString())
+                    listResponse.add(data)
+                    for (char in data.results){
+                        chars.add(char)
+                    }
+                }
+            }
+            withContext(Dispatchers.Main){
+                progressBar.visibility = View.GONE
+            }
+        }
+        return listResponse
+    }
+
+    fun getData(): MutableList<serverResponse>{
+        return listResponse
+    }
+
+    private fun makeCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_wrapper, fragment)
+            commit()
+        }
 
 }
