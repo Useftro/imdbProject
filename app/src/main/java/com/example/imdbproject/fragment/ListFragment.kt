@@ -51,7 +51,7 @@ class ListFragment : Fragment() {
 
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(activity)
-                adapter = FragmentListAdapter(this.context, charactersArrayList)
+                adapter = FragmentListAdapter(charactersArrayList)
             }
         }
     }

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.imdbproject.R
 import com.example.imdbproject.data.fromJsonToKotlin.Result
 
-class FragmentListAdapter(private val context: Context, private val mDataList: ArrayList<Result>) :
+class FragmentListAdapter(private val mDataList: ArrayList<Result>) :
     RecyclerView.Adapter<FragmentListAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,7 +24,7 @@ class FragmentListAdapter(private val context: Context, private val mDataList: A
         holder.characterNameTextView.text = mDataList[position].name
         holder.characterStatusTextView.text = mDataList[position].status
         holder.characterLocationTextView.text = mDataList[position].location.name
-        Glide.with(context).load(mDataList[position].image).into(holder.characterImageView)
+        Glide.with(holder.characterImageView.context).load(mDataList[position].image).into(holder.characterImageView)
     }
 
     override fun getItemCount(): Int {

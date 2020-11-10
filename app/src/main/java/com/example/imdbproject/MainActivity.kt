@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         val profileFragment = ProfileFragment()
         val settingsFragment = SettinsFragment()
 
-        makeCurrentFragment(profileFragment)
+        makeCurrentFragment(homeFragment)
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId){
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 progressBar.visibility = View.GONE
             }
         }
