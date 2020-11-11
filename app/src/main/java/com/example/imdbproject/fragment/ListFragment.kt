@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imdbproject.R
-import com.example.imdbproject.data.fromJsonToKotlin.Location
-import com.example.imdbproject.data.fromJsonToKotlin.Origin
 import com.example.imdbproject.data.fromJsonToKotlin.Result
 
 import com.example.imdbproject.data.fromJsonToKotlin.serverResponse
@@ -48,6 +46,7 @@ class ListFragment : Fragment() {
                     charactersArrayList.add(character)
                 }
             }
+
 
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(activity)

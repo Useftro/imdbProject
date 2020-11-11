@@ -19,6 +19,15 @@
     <string name="surnameText">Enter your surname</string>
     <string name="addressText">Enter your address</string>
 
+    <string name="nameTextView"> Name: </string>
+    <string name="statusTextView"> Status: </string>
+    <string name="speciesTextView"> Species: </string>
+    <string name="genderTextView"> Gender: </string>
+    <string name="originTextView"> Origin: </string>
+    <string name="locationTextView"> Last known location: </string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello 1234 fragment</string>
 </resources>

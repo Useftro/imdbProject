@@ -8,16 +8,16 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class Result(
-    val created: String,
+    val created: String = "",
     val episode: @RawValue List<Any>,
     val gender: String,
     val id: Int,
     val image: String,
-    val location: @RawValue Location,
+    val location: Location,
     val name: String,
-    val origin: @RawValue Origin,
+    val origin: Origin,
     val species: String,
     val status: String,
-    val type: String,
+    val type: String="f",
     val url: String
 ) : Parcelable
