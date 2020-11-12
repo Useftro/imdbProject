@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "209766773779",
+    "firebase_url": "https://riandmoproj.firebaseio.com",
+    "project_id": "riandmoproj",
+    "storage_bucket": "riandmoproj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209766773779:android:12fea45527dcd7c4af7be6",
+        "android_client_info": {
+          "package_name": "com.example.imdbproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209766773779-hokjvnrqrok4aujrtear4huvathikfhq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNJwgSIiKTPaUxZE2V8bEcDig8Zd_b59Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209766773779-hokjvnrqrok4aujrtear4huvathikfhq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

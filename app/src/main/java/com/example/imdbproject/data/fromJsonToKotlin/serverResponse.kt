@@ -7,6 +7,6 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class serverResponse(
-    val info: @RawValue Info,
-    val results: @RawValue ArrayList<Result>
+    val info: @RawValue Info = Info(0, "", 0, ""),
+    val results: @RawValue ArrayList<Result> = ArrayList()
 ): Parcelable

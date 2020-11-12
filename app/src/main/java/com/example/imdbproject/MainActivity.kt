@@ -63,25 +63,22 @@ class MainActivity : AppCompatActivity() {
             .create(ApiRequests::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
-            for (n in 1..34){ // Request takes only 20 chars per request, there are 591 chars
-                val response = api.getCharacters(n).awaitResponse()
-                if(response.isSuccessful){
-                    val data = response.body()!!
-                    Log.d(TAG, data.results.toString())
-                    listResponse.add(data)
-                    for (char in data.results){
-                        chars.add(char)
-                    }
+            // Request takes only 20 chars per request, there are 671 chars
+            val response = api.getCharacters(1).awaitResponse()
+            if(response.isSuccessful){
+                val data = response.body()!!
+                Log.d(TAG, data.results.toString())
+                Log.d("PAGE", data.info.next)
+                listResponse.add(data)
+                for (char in data.results){
+                    chars.add(char)
                 }
             }
+
             withContext(Dispatchers.Main) {
                 progressBar.visibility = View.GONE
             }
         }
-        return listResponse
-    }
-
-    fun getData(): MutableList<serverResponse>{
         return listResponse
     }
 

@@ -7,7 +7,21 @@
     android:background="@drawable/list_pic"
     tools:context=".fragment.ListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/itemsswipetorefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +33,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/recyclerview_charactercard" />
+        tools:listitem="@layout/recyclerview_charactercard" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </FrameLayout>
